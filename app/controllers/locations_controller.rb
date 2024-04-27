@@ -20,9 +20,9 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
 
     if @location.save
-      redirect_to @location, notice: 'Location was successfully created.'
+      redirect_to @location, notice: 'Location was successfully created.', status: :created
     else
-      render :new
+      render :new, status: :unprocessable_entity # Added status: :unprocessable_entity
     end
   end
 
@@ -33,16 +33,16 @@ class LocationsController < ApplicationController
   # PATCH/PUT /locations/:id
   def update
     if @location.update(location_params)
-      redirect_to @location, notice: 'Location was successfully updated.'
+      redirect_to @location, notice: 'Location was successfully updated.', status: :ok
     else
-      render :edit
+      render :edit, status: :unprocessable_entity # Added status: :unprocessable_entity
     end
   end
 
   # DELETE /locations/:id
   def destroy
     @location.destroy
-    redirect_to locations_url, notice: 'Location was successfully destroyed.'
+    redirect_to locations_url, notice: 'Location was successfully destroyed.', status: :see_other
   end
 
   private
