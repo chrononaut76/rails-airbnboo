@@ -12,21 +12,21 @@
 
   <body>
 
-    <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-       <div class="container-fluid">
-        <div class="container-logo">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
+    <div class="logo-container">
         <%= link_to "#", class: "navbar-brand" do %>
-        <%= image_tag "ghost_logo.png" %>
-        <h1 id="navbar-title">AirbnBoo</h1>
-        <% end %>
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+          <%= image_tag "ghost_logo.png" %>
+          <% end %>
+        <h1 id="nav-title">AirbnBoo</h1>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-        <%# <% #if user_signed_in? %>
+        <%# if user_signed_in? %>
           <li class="nav-item active">
             <%= link_to "Home", "#", class: "nav-link" %>
           </li>
@@ -34,8 +34,8 @@
             <%= link_to "Messages", "#", class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
-              <%= image_tag "signup_avatar.jpeg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false%>
-              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <%= image_tag "signup_avatar.jpeg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Sign up", "#", class: "dropdown-item" %>
               <%= link_to "Log in", "#", class: "dropdown-item" %>
               <%= link_to "Log out", "#", class: "dropdown-item", data: {turbo_method: :delete} %>
@@ -45,11 +45,17 @@
           <!--li class="nav-item"-->
             <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
           <!--/li-->
-        <%# <% end %>
+        <%# end %>
       </ul>
     </div>
   </div>
 </div>
+
+
+
+
+
+
 
 
 
@@ -70,7 +76,7 @@
         <a href="#"><i class="fab fa-twitter"></i></a>
       </div>
     <div class="footer-copyright">
-      © 2024 AirBnBoo, Inc. <i class="fas fa-heart"></i>
+      © 2024 AirBnBoo, Inc. Made with <i class="fas fa-heart"></i> by batch #1499
     </div>
 </div>
 

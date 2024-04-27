@@ -1,6 +1,10 @@
 .navbar-lewagon {
+  display: flex;
   justify-content: space-between;
-  // background: white;
+}
+#nav-title{
+  font-size: 40px;
+  color: #C69749;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -18,12 +22,8 @@
 .nav-link {
   color: #C69749 ;
 }
-#navbar-title{
-  color:#C69749;
-}
-.container-logo{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
 
+.logo-container{
+  display: flex;
+  align-items: flex-start;
 }
