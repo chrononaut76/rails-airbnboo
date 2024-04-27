@@ -1,9 +1,15 @@
 <h1>Locations</h1>
-
-<ul>
+<div class="cards">
   <% @locations.each do |location| %>
-    <li>
-      <%= link_to location.name, location %>
-    </li>
+    <div class="card">
+      <%= link_to location do %>
+        <%= image_tag location.image_url, class: "card-img-top" %>
+        <div class="card-body">
+          <h5 class="card-title"><%= location.name %></h5>
+          <p class="card-text"><%= location.description %></p>
+          <p class="card-price">$<%= location.price %></p>
+        </div>
+      <% end %>
+    </div>
   <% end %>
-</ul>
+</div>
