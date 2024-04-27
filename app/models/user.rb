@@ -8,5 +8,5 @@ class User < ApplicationRecord
   validates :encrypted_password, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :is_host, presence: true
+  validates :is_host
 end
