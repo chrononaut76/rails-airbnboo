@@ -1,6 +1,6 @@
 // Specific CSS for your home-page
 body {
-  background-image: url("dan-meyers-wB6B3AqXjy0-unsplash.jpg");
+  background-image: url("homepage_background.jpg");
   background-size: cover;
 }
 
@@ -29,8 +29,8 @@ body {
 }
 
 #title{
-  display:flex;
-  align-items: center;
+  margin-top: 200px;
+  text-align: center;
   color: #C69749;
   font-weight: bold;
   text-shadow: 5px 5px 5px black;
