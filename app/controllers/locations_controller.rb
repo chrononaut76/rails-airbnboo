@@ -8,7 +8,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/:id
   def show
-    @location = Location.find(params[:id])
+    @location
   end
 
   # GET /locations/new
