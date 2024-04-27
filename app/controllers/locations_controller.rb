@@ -8,7 +8,6 @@ class LocationsController < ApplicationController
 
   # GET /locations/:id
   def show
-    @location
   end
 
   # GET /locations/new
