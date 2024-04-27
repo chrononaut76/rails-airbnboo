@@ -1,7 +1,7 @@
 class Location < ApplicationRecord
   # the associations
 
-  # belongs_to :user
+  belongs_to :user
 
   # the validations
   validates :name, presence: true
