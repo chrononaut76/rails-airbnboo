@@ -18,13 +18,13 @@ new_user = User.new(
 puts new_user.save ? "Successfully created user" : "Error while creating user"
 
 8.times do
-  new_location = Location.new(
+  new_location = Location.create!(
     name: 'Gingerbread House',
     address: 'Deep in the woods',
     description: 'An edible lodging made of your favorite sweets from childhod!',
     price: 100.0,
-    image_url: 'images/gingerbread_house.jpg',
-    user_id: 1
+    image_url: 'gingerbread_house.jpg',
+    user_id: user.id
   )
   puts new_location.save ? "Successfully created location" : "Error while creating location"
 end
