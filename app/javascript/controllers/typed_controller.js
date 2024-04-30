@@ -6,9 +6,13 @@ export default class extends Controller {
   static values = { strings: Array}
 
   connect() {
-    new Typed(this.element, {
-      strings: this.stringsValue,
-      typeSpeed: 50
+     const typed = new Typed(this.element, {
+      strings: ["Welcome to AirbnBoo"],
+      typeSpeed: 40,
+      loopCount: 1
     })
   }
+
+
+
 }
