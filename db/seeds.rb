@@ -8,6 +8,15 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+new_user = User.new(
+  email: 'user@email.com',
+  password: '123456',
+  first_name: 'First',
+  last_name: 'Last',
+  is_host: true
+)
+puts new_user.save ? "Successfully created user" : "Error while creating user"
+
 8.times do
   new_location = Location.new(
     name: 'Gingerbread House',
@@ -17,5 +26,5 @@
     image_url: 'images/gingerbread_house.jpg',
     user_id: 1
   )
-  puts "Created new location #{new_location.name}"
+  puts new_location.save ? "Successfully created location" : "Error while creating location"
 end
