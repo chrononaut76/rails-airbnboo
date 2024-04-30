@@ -7,15 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require "faker"
 
-new_user = User.new(
-  email: 'user@email.com',
+new_user = User.create(
+  email: Faker::Internet.email,
   password: '123456',
   first_name: 'First',
   last_name: 'Last',
   is_host: true
 )
-puts new_user.save ? "Successfully created user" : "Error while creating user"
+puts new_user.save! ? "Successfully created user" : "Error while creating user"
 
 8.times do
   new_location = Location.create!(
@@ -24,7 +25,7 @@ puts new_user.save ? "Successfully created user" : "Error while creating user"
     description: 'An edible lodging made of your favorite sweets from childhod!',
     price: 100.0,
     image_url: 'gingerbread_house.jpg',
-    user_id: user.id
+    user_id: new_user.id
   )
   puts new_location.save ? "Successfully created location" : "Error while creating location"
 end
