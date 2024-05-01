@@ -1,0 +1,16 @@
+<h1>New Location</h1>
+
+<%= form_with(model: @location, url: locations_path, method: :post) do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <!-- Add more form fields for address, description, price, image_url, etc. -->
+
+  <div class="actions">
+    <%= form.submit "Create Location" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", locations_path %>
