@@ -1,19 +1,27 @@
-<div class="title-container">
-  <h1>Locations</h1>
-</div>
-<div class="cards-container">
-<div class="cards">
-  <% @locations.each do |location| %>
-    <div class="card">
-      <%= link_to location do %>
-        <%= image_tag location.image_url, class: "card-img-top" %>
-        <div class="card-body">
-          <h5 class="card-title"><%= location.name %></h5>
-          <p class="card-text"><%= location.description %></p>
-          <p class="card-price">$<%= location.price %></p>
-        </div>
-      <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="cards">
+        <% @locations.each do |location| %>
+          <div class="card">
+            <%= link_to location do %>
+              <%= image_tag location.image_url, class: "card-img-top" %>
+              <div class="card-body">
+                <h5 class="card-title"><%= location.name %></h5>
+                <p class="card-text"><%= location.description %></p>
+                <p class="card-price">$<%= location.price %></p>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-</div>
+    <div class="col-md-4">
+      <div data-controller="map"
+           id="map"
+           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+           data-map-markers-value="<%= @markers.to_json %>"
+           style="height: 300px;"></div>
+    </div>
+  </div>
 </div>

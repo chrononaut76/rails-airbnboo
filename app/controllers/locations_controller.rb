@@ -4,6 +4,13 @@ class LocationsController < ApplicationController
   # GET /locations
   def index
     @locations = Location.all
+    @markers = @locations.geocoded.map do |location|
+      {
+        lat: location.latitude,
+        lng: location.longitude,
+        info_window: render_to_string(partial: "popup", locals: { location: location})
+      }
+    end
   end
 
   # GET /locations/:id
