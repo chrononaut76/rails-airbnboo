@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to location_path(@location)
     else
-      render :new, status: :unprocessable_entity
+      redirect_to location_path(@location), status: :unprocessable_entity
     end
   end
 
