@@ -6,6 +6,11 @@ class LocationsController < ApplicationController
     @locations = Location.all
   end
 
+  # GET /loctions/my
+  def my
+    @my_locations = Location.where(user_id: 1)
+  end
+
   # GET /locations/:id
   def show
   end
