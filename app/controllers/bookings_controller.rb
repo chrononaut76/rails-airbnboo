@@ -9,9 +9,10 @@ class BookingsController < ApplicationController
     end
   end
 
-  def edit
-    @booking = Booking.find(params[:id])
-  end
+  # Commented out to work on a single action at a time
+  # def edit
+  #   @booking = Booking.find(params[:id])
+  # end
 
   # def update
   #   @booking = Booking.find(params[:id])
