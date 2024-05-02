@@ -1,0 +1,44 @@
+<h1>Request a Location</h1>
+
+<%= form_with(model: @location, url: locations_path, method: :post) do |form| %>
+  <% if @location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+        <% @location.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Submit Location Request" %>
+  </div>
+<% end %>
