@@ -13,6 +13,8 @@ class LocationsController < ApplicationController
 
   # GET /locations/:id
   def show
+    @booking = Booking.new
+    @pending_booking = Booking.find_by(user: current_user, location: params[:id])
   end
 
   # GET /locations/new
