@@ -1,12 +1,14 @@
 <div class="container">
   <h1><%= @location.name %></h1>
-  <p><strong>Address:</strong> <%= @location.address %></p>
-  <p><strong>Description:</strong> <%= @location.description %></p>
-  <p><strong>Price:</strong> <%= @location.price %></p>
-  <!-- TODO: Stimulus to add partial for booking -->
-  <% if @pending_booking %>
-    <%= @pending_booking.status.upcase %>
-    <% else %>
-    <%= render 'bookings/form', location: @location %>
-  <% end %>
+  <div class="card"
+    <p><strong>Address:</strong> <%= @location.address %></p>
+    <p><strong>Description:</strong> <%= @location.description %></p>
+    <p><strong>Price:</strong> <%= @location.price %></p>
+    <!-- TODO: Stimulus to add partial for booking -->
+    <% if @pending_booking %>
+      <%= @pending_booking.status.upcase %>
+      <% else %>
+      <%= render 'bookings/form', location: @location %>
+    <% end %>
+  </div>
 </div>
