@@ -1,11 +1,20 @@
 class BookingsController < ApplicationController
+  def new
+    @location = Location.find(params[:id])
+    @booking = Booking.new
+  end
+
   def create
-    @booking = Booking.new(booking_params)
+    @booking = Booking.new
+    @user = current_user
+    @location = Location.find(params[:location_id])
+    @booking.user = @user
     @booking.location = @location
+    @booking.status = 1 # status pending
     if @booking.save
       redirect_to location_path(@location)
     else
-      redirect_to location_path(@location), status: :unprocessable_entity
+      redirect_to new, status: :unprocessable_entity
     end
   end
 
