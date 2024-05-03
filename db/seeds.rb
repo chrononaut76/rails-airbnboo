@@ -8,7 +8,6 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 require "faker"
-
 new_user = User.create(
   email: Faker::Internet.email,
   password: '123456',
@@ -17,15 +16,32 @@ new_user = User.create(
   is_host: true
 )
 puts new_user.save! ? "Successfully created user" : "Error while creating user"
-
 8.times do
   new_location = Location.create!(
-    name: 'Gingerbread House',
-    address: 'Deep in the woods',
-    description: 'An edible lodging made of your favorite sweets from childhod!',
-    price: 100.0,
+    name: Faker::Address.unique.community,
+    address: Faker::Address.street_address,
+    description: Faker::Lorem.sentence,
+    price: Faker::Commerce.price(range: 50..200.0),
     image_url: 'gingerbread_house.jpg',
     user_id: new_user.id
   )
   puts new_location.save ? "Successfully created location" : "Error while creating location"
+
+  Location.create(
+    name: 'Montreal Location',
+    address: 'Montreal',
+    description: 'A haunted place in Montreal',
+    price: 120,
+    image_url: 'gingerbread_house.jpg',
+    user_id: new_user.id
+  )
+
+  Location.create(
+    name: 'Berlin Location',
+    address: 'Berlin',
+    description: 'A haunted place in Berlin',
+    price: 120,
+    image_url: 'gingerbread_house.jpg',
+    user_id: new_user.id
+  )
 end
