@@ -32,7 +32,7 @@ class LocationsController < ApplicationController
     if user_signed_in? && current_user.is_host
       @location = Location.new
     else
-      redirect_to root, status: :unauthorized
+      redirect_to root_path, status: :unauthorized
     end
   end
 
@@ -49,7 +49,7 @@ class LocationsController < ApplicationController
   # GET /locations/:id/edit
   def edit
     unless user_signed_in? && current_user.is_host
-      redirect_to root, status: :unauthorized
+      redirect_to root_path, status: :unauthorized
     end
   end
 
@@ -68,7 +68,7 @@ class LocationsController < ApplicationController
       @location.destroy
       redirect_to locations_url, notice: 'Location was successfully destroyed.', status: :see_other
     else
-      redirect_to root, status: :unauthorized
+      redirect_to root_path, status: :unauthorized
     end
   end
 
