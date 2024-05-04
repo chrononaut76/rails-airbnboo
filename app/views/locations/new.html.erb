@@ -1,16 +1,23 @@
-<h1>New Location</h1>
+<div class="container">
+  <h1>New Location</h1>
 
-<%= form_with(model: @location, url: locations_path, method: :post) do |form| %>
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="card">
+    <%= simple_form_for @location do |f| %>
+      <div class="fields">
+        <%= f.input :name %>
+        <%= f.input :address %>
+        <%= f.input :description %>
+        <%= f.input :price %>
+        <%= f.input :image_url %>
+      </div>
+
+      <!-- Add more form fields for address, description, price, image_url, etc. -->
+
+      <div class="actions">
+        <%= f.submit "Create Location" %>
+      </div>
+    <% end %>
+
+    <%= link_to "Back", locations_path %>
   </div>
-
-  <!-- Add more form fields for address, description, price, image_url, etc. -->
-
-  <div class="actions">
-    <%= form.submit "Create Location" %>
-  </div>
-<% end %>
-
-<%= link_to "Back", locations_path %>
+</div>
