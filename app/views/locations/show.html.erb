@@ -5,7 +5,7 @@
     <p><strong>Description:</strong> <%= @location.description %></p>
     <p><strong>Price:</strong> <%= @location.price %></p>
     <!-- TODO: Stimulus to add partial for booking -->
-    <% if user_signed_in %>
+    <% if user_signed_in? %>
       <% if @pending_booking %>
         <%= @pending_booking.status.upcase %>
       <% elsif current_user.is_host %>
