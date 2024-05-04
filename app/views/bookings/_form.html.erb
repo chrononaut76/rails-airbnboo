@@ -1,5 +1,16 @@
 <%= simple_form_for [ @location, @booking ] do |f| %>
-  <%#= f.input :start_date %>
-  <%#= f.input :end_date %>
+  <!-- Add form fields from new.html.erb here -->
+  <div class="field">
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_date %>
+    <%= f.date_field :end_date %>
+  </div>
+
+  <!-- Add more form fields as needed -->
+
   <%= f.submit "Book my stay" %>
 <% end %>
