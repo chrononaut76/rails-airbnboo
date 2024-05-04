@@ -15,33 +15,17 @@ new_user = User.create(
   last_name: 'Last',
   is_host: true
 )
-puts new_user.save! ? "Successfully created user" : "Error while creating user"
-8.times do
+
+image_filenames = Dir.glob("app/assets/images/house_images/*").map { |file| File.basename(file) }
+
+10.times do
   new_location = Location.create!(
     name: Faker::Address.unique.community,
     address: Faker::Address.street_address,
     description: Faker::Lorem.sentence,
     price: Faker::Commerce.price(range: 50..200.0),
-    image_url: 'gingerbread_house.jpg',
+    image_url: "house_images/#{image_filenames.sample}",
     user_id: new_user.id
   )
   puts new_location.save ? "Successfully created location" : "Error while creating location"
-
-  Location.create(
-    name: 'Montreal Location',
-    address: 'Montreal',
-    description: 'A haunted place in Montreal',
-    price: 120,
-    image_url: 'gingerbread_house.jpg',
-    user_id: new_user.id
-  )
-
-  Location.create(
-    name: 'Berlin Location',
-    address: 'Berlin',
-    description: 'A haunted place in Berlin',
-    price: 120,
-    image_url: 'gingerbread_house.jpg',
-    user_id: new_user.id
-  )
 end
