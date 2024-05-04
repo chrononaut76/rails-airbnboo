@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   # GET /locations
@@ -15,7 +16,7 @@ class LocationsController < ApplicationController
 
   # GET /loctions/my
   def my
-    @my_locations = Location.where(user_id: 1)
+    @my_locations = Location.where(user: current_user)
   end
 
   # GET /locations/:id

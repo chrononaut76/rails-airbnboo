@@ -1,4 +1,6 @@
 class BookingsController < ApplicationController
+  before_action :authenticate_user!, only: :create
+
   def new
     @location = Location.find(params[:id])
     @booking = Booking.new
