@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
   # GET /locations
   def index
     if user_signed_in? && current_user.is_host
-      @locations = Location.find_by(user: current_user)
+      @locations = Location.where(user: current_user)
     else
       @locations = Location.all
     end
