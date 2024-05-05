@@ -6,12 +6,18 @@
     <p><strong>Price:</strong> <%= @location.price %></p>
     <!-- TODO: Stimulus to add partial for booking -->
     <% if user_signed_in? %>
-      <% if @pending_booking %>
-        <%= @pending_booking.status.upcase %>
-      <% elsif @booking.present? && current_user.is_host %>
+      <%# Host control flow %>
+      <% if current_user.is_host && @booking.present? %>
         <%= @booking.status %>
         <%= button_to 'Accept', false %>
         <%= button_to 'Reject', false %>
+      <% else %>
+        <p>There are no bookings for this location</p>
+        <p><%= link_to "Back", locations_path %></p>
+      <% end %>
+      <%# Signed-in user control flow %>
+      <% if @pending_booking %>
+        <%= @pending_booking.status.upcase %>
       <% else %>
         <%= render 'bookings/form', location: @location %>
       <% end %>
