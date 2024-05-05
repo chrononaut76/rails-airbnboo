@@ -8,7 +8,7 @@
     <% if user_signed_in? %>
       <% if @pending_booking %>
         <%= @pending_booking.status.upcase %>
-      <% elsif current_user.is_host %>
+      <% elsif @booking.present? && current_user.is_host %>
         <%= @booking.status %>
         <%= button_to 'Accept', false %>
         <%= button_to 'Reject', false %>
