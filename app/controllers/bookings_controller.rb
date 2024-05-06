@@ -1,6 +1,10 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]  # Add this line to enforce authentication
 
+  def index
+    @bookings = Booking.where(user: current_user)
+  end
+
   def new
     @location = Location.find(params[:location_id])
     @booking = Booking.new

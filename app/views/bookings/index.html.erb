@@ -1,0 +1,45 @@
+
+<div class="container-bookings">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="cards">
+        <% @bookings.each do |booking| %>
+          <div class="card">
+            <%= link_to location_path(booking.location) do %>
+              <%= image_tag booking.location.image_url, class: "card-img-top" %>
+              <div class="card-body">
+                <h5 class="card-title"><%= booking.user.last_name %></h5>
+                <p class="card-text"><%= booking.location.name %></p>
+                <p class="card-price">$<%= booking.status %></p>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%#
+
+<% @bookings.each do |booking| %>
+
+<%# <%= booking.user.last_name %>
+<%# <%= booking.status %>
+
+<%# <% end %>
+<%# </div> %>
