@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @location = Location.find(params[:location_id])
+    @location = Location.find(params[:id])
     @booking = Booking.new
   end
 
