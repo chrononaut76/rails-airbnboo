@@ -3,6 +3,9 @@ class LocationsController < ApplicationController
 
   # GET /locations
   def index
+    if params[:query].present?
+      @locations = Location.search_by_name_address_description(params[:query])
+    else
     @locations = Location.all
     @markers = @locations.geocoded.map do |location|
       {
@@ -10,6 +13,7 @@ class LocationsController < ApplicationController
         lng: location.longitude,
         info_window: render_to_string(partial: "popup", locals: { location: location})
       }
+      end
     end
   end
 
