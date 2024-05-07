@@ -5,6 +5,14 @@ class Location < ApplicationRecord
 
   belongs_to :user
 
+  include PgSearch::Model
+
+  pg_search_scope :search_by_name_address_description,
+    against: [:name, :address, :description],
+    using: {
+      tsearch: { prefix: true } # <-- now `superman batm` will return something!
+    }
+
   # the validations
   validates :name, presence: true
   validates :address, presence: true
