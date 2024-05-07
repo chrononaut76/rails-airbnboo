@@ -8,8 +8,7 @@
     <% if current_user.present? && current_user.is_host %>
       <%# Host control flow %>
       <% if @booking.present? %>
-        <%= @booking.status.upcase %>
-        <%= render 'bookings/form', location: @location %>
+        <%= link_to @booking.status.upcase, edit_booking_path(@booking) %>
       <% else %>
         <p>There are no bookings for this location</p>
         <p><%= link_to "Back", locations_path %></p>
