@@ -3,17 +3,17 @@ class LocationsController < ApplicationController
 
   # GET /locations
   def index
-    if user_signed_in? && current_user.is_host
-      @locations = Location.where(user: current_user)
+    if params[:query].present?
+      @locations = Location.search_by_name_address_description(params[:query])
     else
-      @locations = Location.all
-    end
+    @locations = Location.all
     @markers = @locations.geocoded.map do |location|
       {
         lat: location.latitude,
         lng: location.longitude,
         info_window: render_to_string(partial: "popup", locals: { location: location})
       }
+      end
     end
   end
 
