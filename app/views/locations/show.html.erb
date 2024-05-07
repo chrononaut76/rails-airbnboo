@@ -5,13 +5,10 @@
     <p><strong>Description:</strong> <%= @location.description %></p>
     <p><strong>Price:</strong> <%= @location.price %></p>
 
-    <p>User signed in: <%= user_signed_in? %></p>
-    <p>User is host: <%= current_user ? current_user.is_host : false %></p>
-
-    <% if user_signed_in? %>
+    <% if current_user.present? && current_user.is_host %>
       <%# Host control flow %>
-      <% if current_user.is_host && @booking.present? %>
-        <%= @booking.status %>
+      <% if @booking.present? %>
+        <%= @booking.status.upcase %>
         <%= button_to 'Accept', false %>
         <%= button_to 'Reject', false %>
       <% else %>
@@ -19,11 +16,10 @@
         <p><%= link_to "Back", locations_path %></p>
       <% end %>
       <%# Signed-in user control flow %>
-      <% if @pending_booking %>
-        <%= @pending_booking.status.upcase %>
-      <% else %>
-        <%= render 'bookings/form', location: @location %>
-      <% end %>
+    <% elsif user_signed_in? && @pending_booking.present? %>
+      <p><%= @pending_booking.status.upcase %></p>
+    <% else %>
+      <%= render 'bookings/form', location: @location %>
     <% end %>
   </div>
 </div>
