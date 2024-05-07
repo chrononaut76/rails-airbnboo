@@ -38,7 +38,7 @@ class LocationsController < ApplicationController
 
   # POST /locations
   def create
-    @location = Location.new(location_params)
+    @location = current_user.locations.build(location_params)
     if @location.save
       redirect_to @location, notice: 'Location was successfully created.', status: :created
     else
