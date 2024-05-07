@@ -19,21 +19,13 @@ class LocationsController < ApplicationController
 
   # GET /locations/:id
   def show
-    if user_signed_in? && current_user.is_host
-      @booking = Booking.find_by(location: params[:id])
-    else
-      @booking = Booking.new
-      @pending_booking = Booking.find_by(user: current_user, location: params[:id])
-    end
+    @booking = Booking.new
+    @pending_booking = Booking.find_by(user: current_user, location: params[:id])
   end
 
   # GET /locations/new
   def new
-    if user_signed_in? && current_user.is_host
-      @location = Location.new
-    else
-      redirect_to root_path, status: :unauthorized
-    end
+    @location = Location.new
   end
 
   # POST /locations
@@ -48,9 +40,6 @@ class LocationsController < ApplicationController
 
   # GET /locations/:id/edit
   def edit
-    unless user_signed_in? && current_user.is_host
-      redirect_to root_path, status: :unauthorized
-    end
   end
 
   # PATCH/PUT /locations/:id
@@ -64,12 +53,8 @@ class LocationsController < ApplicationController
 
   # DELETE /locations/:id
   def destroy
-    if user_signed_in? && current_user.is_host
-      @location.destroy
-      redirect_to locations_url, notice: 'Location was successfully destroyed.', status: :see_other
-    else
-      redirect_to root_path, status: :unauthorized
-    end
+    @location.destroy
+    redirect_to locations_url, notice: 'Location was successfully destroyed.', status: :see_other
   end
 
   private
