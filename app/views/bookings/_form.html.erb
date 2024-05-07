@@ -1,5 +1,10 @@
 <%= simple_form_for([ @location, @booking ]) do |f| %>
-  <%= f.submit "Book my stay" %>
+  <% if current_user.present? && current_user.is_host? %>
+    <%= f.input "Accept" %>
+    <%= f.input "Reject" %>
+  <% else %>
+    <%= f.submit "Book my stay" %>
+  <% end %>
 <% end %>
 
 <!-- Add form fields from new.html.erb here -->

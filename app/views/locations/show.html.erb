@@ -9,8 +9,7 @@
       <%# Host control flow %>
       <% if @booking.present? %>
         <%= @booking.status.upcase %>
-        <%= button_to 'Accept', false %>
-        <%= button_to 'Reject', false %>
+        <%= render 'bookings/form', location: @location %>
       <% else %>
         <p>There are no bookings for this location</p>
         <p><%= link_to "Back", locations_path %></p>
