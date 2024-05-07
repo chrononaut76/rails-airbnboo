@@ -1,16 +1,11 @@
 <%= simple_form_for [ @location, @booking ] do |f| %>
-  <!-- Add form fields from new.html.erb here -->
-  <%# <div class="field">
-    <%= f.label :start_date %>
-    <%# <%= f.date_field :start_date %>
-  <%# </div>   %>
-<%#
   <div class="field">
-    <%= f.label :end_date %>
-    <%# <%= f.date_field :end_date %>
-  <%# </div> %>
+    <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+  </div>
 
-  <!-- Add more form fields as needed -->
+  <div class="field">
+    <%= f.input :end_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+  </div>
 
-  <%= f.submit "Book my stay" %>
+  <%= f.submit "Book" %>
 <% end %>
