@@ -17,6 +17,10 @@ class LocationsController < ApplicationController
     end
   end
 
+  def my_locations
+    @my_locations = Location.where(user: current_user)
+  end
+
   # GET /locations/:id
   def show
     @booking = Booking.new
