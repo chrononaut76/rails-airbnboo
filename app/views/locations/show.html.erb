@@ -6,9 +6,13 @@
     <p><strong>Description:</strong> <%= @location.description %></p>
     <p><strong>Price:</strong> <%= @location.price %></p>
 
+    <p><%= current_user.email %></p>
+    <p><%= current_user.id %></p>
+    <p><%= @booking %></p>
+
     <% if current_user.present? && current_user.is_host %>
       <%# Host control flow %>
-      <% if @booking.present? %>
+      <% if @booking.present? && @booking.user == current_user %>
         <%= @booking.status.upcase %>
         <%= render 'bookings/edit', booking: @booking %>
       <% else %>
@@ -19,6 +23,7 @@
     <% elsif user_signed_in? && @pending_booking.present? %>
       <p><%= @pending_booking.status.upcase %></p>
     <% else %>
+    <%# Signed-out user control flow %>
       <%= render 'bookings/form', location: @location %>
     <% end %>
   </div>

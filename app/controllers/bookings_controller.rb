@@ -12,11 +12,8 @@ class BookingsController < ApplicationController
 
   def create
     if user_signed_in? # Check if the user is signed in
-      @booking = Booking.new
-      @user = current_user
-      @location = Location.find(params[:location_id])
-      @booking.user = @user
-      @booking.location = @location
+      @booking = Booking.new(booking_params)
+      @booking.user = current_user
       @booking.status = 1 # status pending
       if @booking.save
         redirect_to location_path(@location)
@@ -41,6 +38,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:status)
+    params.require(:booking).permit(:start_date, :end_date)
   end
 end
