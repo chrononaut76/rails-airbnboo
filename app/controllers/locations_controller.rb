@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]  # Add this line to enforce authentication
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   # GET /locations
@@ -6,30 +7,37 @@ class LocationsController < ApplicationController
     if params[:query].present?
       @locations = Location.search_by_name_address_description(params[:query])
     else
-    @locations = Location.all
-    @markers = @locations.geocoded.map do |location|
-      {
+      @locations = Location.all
+      @markers = @locations.geocoded.map do |location| {
         lat: location.latitude,
         lng: location.longitude,
-        info_window: render_to_string(partial: "popup", locals: { location: location})
+        info_window: render_to_string(partial: "popup", locals: { location: location })
       }
       end
     end
   end
 
   def my_locations
-    @my_locations = Location.where(user: current_user)
+    if current_user.is_host
+      @my_locations = Location.where(user: current_user)
+    else
+      redirect_to root_path, status: :unauthorized
+    end
   end
 
   # GET /locations/:id
   def show
     @booking = Booking.new
-    @pending_booking = Booking.find_by(user: current_user, location: params[:id])
+    @pending_booking = Booking.find_by(user: current_user, location: @location)
   end
 
   # GET /locations/new
   def new
-    @location = Location.new
+    if current_user.is_host
+      @location = Location.new
+    else
+      redirect_to root_path, status: :unauthorized
+    end
   end
 
   # POST /locations
@@ -44,6 +52,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/:id/edit
   def edit
+    redirect_to root_path, status: :unauthorized unless current_user.is_host
   end
 
   # PATCH/PUT /locations/:id
@@ -57,6 +66,7 @@ class LocationsController < ApplicationController
 
   # DELETE /locations/:id
   def destroy
+    redirect_to root_path, status: :unauthorized unless current_user.is_host
     @location.destroy
     redirect_to locations_url, notice: 'Location was successfully destroyed.', status: :see_other
   end
