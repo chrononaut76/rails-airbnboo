@@ -8,6 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 require "faker"
+
+Faker::Config.locale = "en"
+
 new_user = User.create(
   email: Faker::Internet.email,
   password: '123456',
@@ -18,10 +21,10 @@ new_user = User.create(
 
 image_filenames = Dir.glob("app/assets/images/house_images/*").map { |file| File.basename(file) }
 
-10.times do
+50.times do
   new_location = Location.create!(
     name: Faker::Address.unique.community,
-    address: Faker::Address.street_address,
+    address: "#{Faker::Address.city}, #{Faker::Address.country}",
     description: Faker::Lorem.sentence,
     price: Faker::Commerce.price(range: 50..200.0),
     image_url: "house_images/#{image_filenames.sample}",
