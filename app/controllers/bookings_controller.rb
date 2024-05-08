@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @location = Location.find(params[:location_id])
+    @location = Location.find(params[:id])
     @booking = Booking.new
   end
 
@@ -28,20 +28,19 @@ class BookingsController < ApplicationController
     end
   end
 
-  # Commented out to work on a single action at a time
   # def edit
   #   @booking = Booking.find(params[:id])
   # end
 
-  # def update
-  #   @booking = Booking.find(params[:id])
-  #   @booking.update(booking_params)
-  #   redirect_to booking_path(@booking)
-  # end
+  def update
+    @booking = Booking.find(params[:id])
+    @booking.update(booking_params)
+    redirect_to location_path(@booking.location)
+  end
 
   private
 
   def booking_params
-    params.require(:booking).permit(:location_id)
+    params.require(:booking).permit(:status)
   end
 end

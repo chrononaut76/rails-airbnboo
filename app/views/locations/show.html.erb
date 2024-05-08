@@ -1,13 +1,24 @@
 <div class="container">
   <h1><%= @location.name %></h1>
   <div class="card">
+    <%= image_tag @location.image_url, class: "card-img-top", style: "max-width: 300px" %>
     <p><strong>Address:</strong> <%= @location.address %></p>
     <p><strong>Description:</strong> <%= @location.description %></p>
     <p><strong>Price:</strong> <%= @location.price %></p>
-    <!-- TODO: Stimulus to add partial for booking -->
-    <% if @pending_booking %>
-      <%= @pending_booking.status.upcase %>
+
+    <% if current_user.present? && current_user.is_host %>
+      <%# Host control flow %>
+      <% if @booking.present? %>
+        <%= @booking.status.upcase %>
+        <%= render 'bookings/edit', booking: @booking %>
       <% else %>
+        <p>There are no bookings for this location</p>
+        <p><%= link_to "Back", locations_path %></p>
+      <% end %>
+      <%# Signed-in user control flow %>
+    <% elsif user_signed_in? && @pending_booking.present? %>
+      <p><%= @pending_booking.status.upcase %></p>
+    <% else %>
       <%= render 'bookings/form', location: @location %>
     <% end %>
   </div>
