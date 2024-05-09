@@ -4,5 +4,5 @@ class Booking < ApplicationRecord
 
   validates :user, :location, :status, presence: true
   # validates :user, :location, :status, uniqueness: true
-  enum status: { accepted: 0, pending: 1, rejected: 2 }
+  enum status: { available: 0, pending: 1, accepted: 2, rejected: 3 }
 end
