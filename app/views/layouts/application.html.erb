@@ -32,14 +32,22 @@
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
+          <% if user_signed_in? && current_user.is_host %>
           <li class="nav-item">
             <%= link_to "Add a Location", new_location_path, class: "nav-link" %>
           </li>
+           <li class="nav-item">
+            <%= link_to "My bookings", bookings_path, class: "nav-link" %>
+          </li>
+          <% elsif user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "My bookings", bookings_path, class: "nav-link" %>
+             </li>
+          <% end %>
           <li class="nav-item dropdown">
             <%= image_tag "signup_avatar.jpeg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
         <% if user_signed_in? %>
-              <%= link_to "My bookings", bookings_path, class:"dropdown-item" %>
               <%= link_to "Log out",  destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
         <% else %>
               <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
