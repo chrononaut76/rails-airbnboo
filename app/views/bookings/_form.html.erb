@@ -1,4 +1,4 @@
-<%= simple_form_for [ @location, @booking ] do |f| %>
+<%= simple_form_for([ @location, @booking ]) do |f| %>
   <div class="field">
     <%= f.input :start_date, as: :string, input_html: { data: { controller: "datepicker" } } %>
   </div>

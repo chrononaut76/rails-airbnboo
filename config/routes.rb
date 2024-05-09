@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   resources :locations do
     resources :bookings, only: %i[new create]
   end
+  get 'my_locations', to: 'locations#my_locations'
   resources :bookings, except: %i[new create]
 end
