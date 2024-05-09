@@ -33,9 +33,13 @@ body {
   background: black;
   color: #C69749;
 }
-.notice {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #C69749;
-  text-shadow: 5px 5px 5px black;
-  font-weight: bold;
+.notice,
+.alert,
+.div.alert.alert.danger {
+  font-family: Arial, Helvetica, sans-serif !important;
+  color: #C69749 !important;
+  text-shadow: 5px 5px 5px black !important;
+  font-weight: bold !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
 }
