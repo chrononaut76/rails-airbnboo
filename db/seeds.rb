@@ -8,6 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 require "faker"
+require "geocoder"
+
+Faker::Config.locale = "en"
+
 new_user = User.create(
   email: Faker::Internet.email,
   password: '123456',
@@ -18,10 +22,23 @@ new_user = User.create(
 
 image_filenames = Dir.glob("app/assets/images/house_images/*").map { |file| File.basename(file) }
 
-10.times do
+canadian_provinces = ['Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Nova Scotia', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan']
+# The reason I put 100 is that it filters out teh locations that are not in Canada
+100.times do
+  latitude = rand(41.676555..83.116667)
+  longitude = rand(-140.99778..-52.648098)
+
+  result = Geocoder.search([latitude, longitude], country: 'Canada')
+
+  canadian_result = result.find { |r| canadian_provinces.include?(r.state) }
+
+  next unless canadian_result
+
+  city = canadian_result.city
+
   new_location = Location.create!(
     name: Faker::Address.unique.community,
-    address: Faker::Address.street_address,
+    address: "#{city}, #{canadian_result.state}, Canada",
     description: Faker::Lorem.sentence,
     price: Faker::Commerce.price(range: 50..200.0),
     image_url: "house_images/#{image_filenames.sample}",

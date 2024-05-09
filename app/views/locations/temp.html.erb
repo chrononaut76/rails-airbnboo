@@ -1,0 +1,16 @@
+<% if current_user.present? && current_user.is_host %>
+  <%# Host control flow %>
+  <% if @booking.present? %>
+    <%= @booking.status.upcase %>
+    <%= render 'bookings/edit', booking: @booking %>
+  <% else %>
+    <p>There are no bookings for this location</p>
+    <p><%= link_to "Back", locations_path %></p>
+  <% end %>
+  <%# Signed-in user control flow %>
+  <% elsif user_signed_in? && @pending_booking.present? %>
+    <p><%= @pending_booking.status.upcase %></p>
+  <% else %>
+    <%# Signed-out user control flow %>
+    <%= render 'bookings/form', location: @location %>
+<% end %>

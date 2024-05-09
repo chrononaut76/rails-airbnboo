@@ -1,9 +1,16 @@
 import { Controller } from "@hotwired/stimulus"
-// Connects to data-controller="toggle"
+
 export default class extends Controller {
-  static targets = [ "toggleableElement" ]
+  static targets = ["toggleableElement"]
+
   fire() {
-    console.log("Button clicked");
-    this.toggleableElementTarget.classList.toggle("d-none")
+    const formContainer = this.toggleableElementTarget;
+    formContainer.classList.toggle("d-none");
+
+    if (formContainer.classList.contains("d-none")) {
+      formContainer.parentElement.style.height = null;
+    } else {
+      formContainer.parentElement.style.height = "500px"; // Adjust the height as needed
+    }
   }
 }
