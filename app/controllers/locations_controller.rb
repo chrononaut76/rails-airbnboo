@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]  # Add this line to enforce authentication
+  before_action :validate_host, only: [:my_locations, :new, :edit, :destroy]
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   # GET /locations
@@ -8,21 +9,18 @@ class LocationsController < ApplicationController
       @locations = Location.search_by_name_address_description(params[:query])
     else
       @locations = Location.all
-      @markers = @locations.geocoded.map do |location| {
-        lat: location.latitude,
-        lng: location.longitude,
-        info_window: render_to_string(partial: "popup", locals: { location: location })
-      }
+      @markers = @locations.geocoded.map do |location|
+        {
+          lat: location.latitude,
+          lng: location.longitude,
+          info_window: render_to_string(partial: "popup", locals: { location: location })
+        }
       end
     end
   end
 
   def my_locations
-    if current_user.is_host
-      @my_locations = Location.where(user: current_user)
-    else
-      redirect_to root_path, status: :unauthorized
-    end
+    @my_locations = Location.where(user: current_user)
   end
 
   # GET /locations/:id
@@ -33,11 +31,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/new
   def new
-    if current_user.is_host
-      @location = Location.new
-    else
-      redirect_to root_path, status: :unauthorized
-    end
+    @location = Location.new
   end
 
   # POST /locations
@@ -52,7 +46,6 @@ class LocationsController < ApplicationController
 
   # GET /locations/:id/edit
   def edit
-    redirect_to root_path, status: :unauthorized unless current_user.is_host
   end
 
   # PATCH/PUT /locations/:id
@@ -66,12 +59,15 @@ class LocationsController < ApplicationController
 
   # DELETE /locations/:id
   def destroy
-    redirect_to root_path, status: :unauthorized unless current_user.is_host
     @location.destroy
     redirect_to locations_url, notice: 'Location was successfully destroyed.', status: :see_other
   end
 
   private
+
+  def validate_host
+    redirect_to root_path, status: :unauthorized unless current_user.is_host
+  end
 
   def set_location
     @location = Location.find(params[:id])
