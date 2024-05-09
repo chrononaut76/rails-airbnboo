@@ -1,5 +1,10 @@
 <div class="welcome-container">
   <h1 id="title" data-controller="typed" data-typed-string-value=""></h1>
+  <div class="user-greeting">
+    <% if user_signed_in? %>
+    <h3>Hello <%= current_user.first_name %>!</h3>
+    <% end %>
+  </div>
 
   <div class="container">
       <div class="col-12 col-lg-5 mx-auto">
@@ -11,6 +16,7 @@
                   %>
                 <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
               <% end %>
+
       </div>
     </div>
   </div>
