@@ -47,7 +47,7 @@
           <li class="nav-item dropdown">
             <%= image_tag "signup_avatar.jpeg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        <%# if user_signed_in? %>
+        <% if user_signed_in? %>
           <%# if current_user.is_host %>
             <%#= link_to "My locations", my_locations_path, class:"dropdown-item" %>
           <%# end %>
