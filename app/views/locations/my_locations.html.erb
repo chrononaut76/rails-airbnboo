@@ -1,7 +1,28 @@
-<%= link_to 'Add a location', new_location_path %>
-<% @my_locations.each do |location| %>
-  <p><%= location.name %></p>
-  <p><%= location.address %></p>
-  <p><%= location.description %></p>
-  <p><%= location.price %></p>
-<% end %>
+<div class="container-location">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="cards">
+        <% @my_locations.each do |location| %>
+          <div class="card">
+            <%= link_to location do %>
+              <%= image_tag location.image_url, class: "card-img-top" %>
+              <div class="card-body">
+                <h5 class="card-title"><%= location.name %></h5>
+                <p class="card-text"><%= location.description %></p>
+                <p class="card-price">$<%= location.price %></p>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4 map-column">
+      <div data-controller="map"
+           id="map"
+           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+           data-map-markers-value="<%= @markers.to_json %>"
+           style="height: 20%;">
+      </div>
+    </div>
+  </div>
+</div>
