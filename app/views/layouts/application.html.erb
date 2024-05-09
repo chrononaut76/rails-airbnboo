@@ -48,15 +48,11 @@
             <%= image_tag "signup_avatar.jpeg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
         <% if user_signed_in? %>
-<<<<<<< HEAD
           <% if current_user.is_host %>
             <%= link_to "My locations", my_locations_path, class:"dropdown-item" %>
           <% end %>
           <%= link_to "My bookings", bookings_path, class:"dropdown-item" %>
           <%= link_to "Log out",  destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
-=======
-              <%= link_to "Log out",  destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
->>>>>>> master
         <% else %>
               <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
               <%= link_to "Log in", new_user_session_path, class: "dropdown-item" %>
