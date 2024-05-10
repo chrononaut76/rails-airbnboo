@@ -5,17 +5,19 @@ class LocationsController < ApplicationController
 
   # GET /locations
   def index
-    if params[:query].present?
-      @locations = Location.search_by_name_address_description(params[:query])
-    else
+    results = Location.search_by_name_address_description(params[:query])
+    if results.empty?
       @locations = Location.all
-      @markers = @locations.geocoded.map do |location|
-        {
-          lat: location.latitude,
-          lng: location.longitude,
-          info_window: render_to_string(partial: "popup", locals: { location: location })
-        }
-      end
+      @message = "No locations found"
+    else
+      @locations = results
+    end
+    @markers = @locations.geocoded.map do |location|
+      {
+        lat: location.latitude,
+        lng: location.longitude,
+        info_window: render_to_string(partial: "popup", locals: { location: location })
+      }
     end
   end
 
@@ -77,3 +79,11 @@ class LocationsController < ApplicationController
     params.require(:location).permit(:name, :address, :description, :price, :image_url)
   end
 end
+
+
+ # if params[:query].present?
+    #   @locations = Location.search_by_name_address_description(params[:query])
+    #   if @locations.empty?
+    #     redirect_to Location.all, notice: 'Location not found.'
+    # else
+    #   @locations = Location.all
