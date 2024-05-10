@@ -8,7 +8,7 @@
 
     <% if current_user.present? && current_user.is_host %>
       <%# Host control flow %>
-      <% unless @booking.nil? %>
+      <% if @booking.present? %>
         <%= @booking.status %>
         <%= render 'bookings/edit', booking: @booking %>
       <% else %>
