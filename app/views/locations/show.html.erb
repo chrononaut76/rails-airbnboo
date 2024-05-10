@@ -5,26 +5,11 @@
     <p><strong>Address:</strong> <%= @location.address %></p>
     <p><strong>Description:</strong> <%= @location.description %></p>
     <p><strong>Price:</strong> <%= @location.price %></p>
-
-    <% if current_user.present? && current_user.is_host %>
-      <%# Host control flow %>
-      <% if @booking.present? %>
-        <%= @booking.status %>
-        <%= render 'bookings/edit', booking: @booking %>
-      <% else %>
-        <p>There are no bookings for this location</p>
-        <p><%= link_to "Back", locations_path %></p>
-      <% end %>
-      <%# Signed-in user control flow %>
-    <% elsif user_signed_in? && @pending_booking.present? %>
-      <p><%= @pending_booking.status %></p>
-    <% else %>
-        <div data-controller="toggle">
-    <button class="btn btn-primary mt-4" data-action="click->toggle#fire">Book!</button>
-    <div class="mt-3 d-none" data-toggle-target="toggleableElement">
+    <div data-controller="toggle">
+      <button class="btn btn-primary mt-4" data-action="click->toggle#fire">Book!</button>
+      <div class="mt-3 d-none" data-toggle-target="toggleableElement">
         <%= render 'bookings/form', booking: @booking, location: @location %>
+      </div>
     </div>
-  </div>
-    <% end %>
   </div>
 </div>
