@@ -11,11 +11,12 @@ class BookingsController < ApplicationController
   end
 
   def create
+    @location = Location.find(params[:id])
     @booking = Booking.new(booking_params)
     @booking.user = current_user
     @booking.status = 1 # status pending
     if @booking.save
-      redirect_to location_path(@location)
+      redirect_to location_path(@location), notice: 'Booking was created successfully!'
     else
       render :new, location_path(@location), status: :unprocessable_entity  # Use new_location_booking_path
     end
