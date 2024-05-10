@@ -11,17 +11,13 @@ class BookingsController < ApplicationController
   end
 
   def create
-    if user_signed_in? # Check if the user is signed in
-      @booking = Booking.new(booking_params)
-      @booking.user = current_user
-      @booking.status = 1 # status pending
-      if @booking.save
-        redirect_to location_path(@location)
-      else
-        redirect_to new_location_booking_path(@location)  # Use new_location_booking_path
-      end
+    @booking = Booking.new(booking_params)
+    @booking.user = current_user
+    @booking.status = 1 # status pending
+    if @booking.save
+      redirect_to location_path(@location)
     else
-      redirect_to new_user_session_path # Redirect to the login screen
+      render :new, location_path(@location), status: :unprocessable_entity  # Use new_location_booking_path
     end
   end
 
