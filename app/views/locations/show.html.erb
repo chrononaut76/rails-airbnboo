@@ -9,7 +9,7 @@
     <% if current_user.present? && current_user.is_host %>
       <%# Host control flow %>
       <% unless @booking.nil? %>
-        <%= @booking.status.upcase %>
+        <%= @booking.status %>
         <%= render 'bookings/edit', booking: @booking %>
       <% else %>
         <p>There are no bookings for this location</p>
@@ -17,7 +17,7 @@
       <% end %>
       <%# Signed-in user control flow %>
     <% elsif user_signed_in? && @pending_booking.present? %>
-      <p><%= @pending_booking.status.upcase %></p>
+      <p><%= @pending_booking.status %></p>
     <% else %>
         <div data-controller="toggle">
     <button class="btn btn-primary mt-4" data-action="click->toggle#fire">Book!</button>
